@@ -59,11 +59,14 @@ Vagrant.configure("2") do |config|
   # documentation for more information about their specific syntax and use.
   $install = <<-SHELL
     sudo apt-get update
-    sudo apt-get install -y --no-install-recommends software-properties-common
+    sudo apt-get install -y --no-install-recommends software-properties-common wget
     sudo add-apt-repository ppa:ethereum/ethereum
     sudo apt-get update
     sudo apt-get install --no-install-recommends -y npm solc
     sudo apt-get clean
+    wget https://storage.googleapis.com/genesis-public/nonce/master/bin/linux/amd64/nonce
+    sudo cp ./nonce /usr/local/bin
+    sudo chmod a+x /usr/local/bin/nonce
     sudo rm -rf /var/lib/apt/lists/*
     sudo docker pull gcr.io/whiteblock/geth:light
     sudo docker pull gcr.io/whiteblock/parity:light

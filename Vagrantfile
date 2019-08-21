@@ -37,18 +37,19 @@ Vagrant.configure("2") do |config|
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
   $start = <<-START
-
-    sudo docker run --rm -d --name genesis \
-    -v /home/vagrant/.ssh/id_rsa:/root/.ssh/id_rsa \
-    -v /home/vagrant/.ssh/id_rsa.pub:/root/.ssh/id_rsa.pub \
-    -v /home/vagrant/.ssh/authorized_keys:/root/.ssh/authorized_keys \
-    -e SSH_USER='vagrant' \
-    -e SSH_KEY='/root/.ssh/id_rsa' \
-    -e HANDLE_NODE_SSH_KEYS='true' \
-    -e NODES_PUBLIC_KEY=/root/.ssh/id_rsa.pub \
-    -e NODES_PRIVATE_KEY=/root/.ssh/id_rsa \
-    -e LISTEN='0.0.0.0:8000' \
-    --net=host \
-    gcr.io/whiteblock/genesis:dev-alpine
-  START
+#!/bin/bash
+sudo docker run --rm -d --name genesis \
+-v /home/vagrant/.ssh/id_rsa:/root/.ssh/id_rsa \
+-v /home/vagrant/.ssh/id_rsa.pub:/root/.ssh/id_rsa.pub \
+-v /home/vagrant/.ssh/authorized_keys:/root/.ssh/authorized_keys \
+-e SSH_USER='vagrant' \
+-e SSH_KEY='/root/.ssh/id_rsa' \
+-e HANDLE_NODE_SSH_KEYS='true' \
+-e NODES_PUBLIC_KEY=/root/.ssh/id_rsa.pub \
+-e NODES_PRIVATE_KEY=/root/.ssh/id_rsa \
+-e LISTEN='0.0.0.0:8000' \
+--net=host \
+gcr.io/whiteblock/genesis:dev-alpine
+START
+  config.vm.provision "start", type: "shell", inline: $start
 end

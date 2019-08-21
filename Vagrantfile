@@ -57,7 +57,7 @@ Vagrant.configure("2") do |config|
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
-  config.vm.provision "shell",public_network inline: <<-SHELL
+  $start = <<-START
 
     sudo docker run --rm -d --name genesis \
     -v /home/vagrant/.ssh/id_rsa:/root/.ssh/id_rsa \
@@ -71,5 +71,5 @@ Vagrant.configure("2") do |config|
     -e LISTEN='0.0.0.0:8000' \
     --net=host \
     gcr.io/whiteblock/genesis:dev-alpine
-  SHELL
+  START
 end

@@ -63,7 +63,7 @@ $install = <<-INSTALL
 sudo apt-get update
 sudo apt-get install -y --no-install-recommends wget
 sudo apt-get clean
-wget https://storage.googleapis.com/genesis-public/nonce/master/bin/linux/amd64/nonce
+sudo wget https://storage.googleapis.com/genesis-public/nonce/master/bin/linux/amd64/nonce
 sudo cp ./nonce /usr/local/bin
 sudo chmod a+x /usr/local/bin/nonce
 sudo rm -rf /var/lib/apt/lists/*
